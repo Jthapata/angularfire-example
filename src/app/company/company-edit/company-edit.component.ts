@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Company } from '../../models/company';
 import { CompanyService } from '../company.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-company-edit',
@@ -10,24 +10,39 @@ import { CompanyService } from '../company.service';
   styleUrl: './company-edit.component.css'
 })
 export class CompanyEditComponent implements OnInit {
-  company$: Observable<Company | any>;
+  company$: Observable<Company | undefined>;
 
-  constructor(private companyService: CompanyService) {
-    this.company$ = this.companyService.getCompanyObservable();
+  constructor(
+    private companyService: CompanyService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
+  ) {
+    if (!this.isNew) {
+      this.company$ = companyService.getCompanyObservable(this.id);
+    } else {
+      this.company$ = of({}) as Observable<Company>;
+    }
   }
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  get id(): string | null {
+    return this.activatedRoute.snapshot.paramMap.get('id');
+  }
+  get isNew(): boolean {
+    return this.id === 'new';
   }
 
   saveCompany(company: Company) {
-    this.companyService.saveCompany(company);
+    this.companyService.saveCompany(company)
+      .then(_ => this.router.navigate(['/company/all']));
   }
-
-  editCompany() {
-    this.companyService.editCompany({phone: '123-456-7890'});
+  editCompany(company: Company) {
+    this.companyService.editCompany(this.id as string, company)
+      .then(_ => this.router.navigate(['/company/all']));
   }
-
   deleteCompany() {
-    this.companyService.deleteCompany();
+    this.companyService.deleteCompany(this.id as string)
+      .then(_ => this.router.navigate(['/company/all']));
   }
 }

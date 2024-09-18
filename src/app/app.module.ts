@@ -16,11 +16,14 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from "@angular/material/input";
+import { CompanyListComponent } from './company/company-list/company-list.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CompanyEditComponent
+    CompanyEditComponent,
+    CompanyListComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +37,8 @@ import { MatInputModule } from "@angular/material/input";
     MatButtonModule,
     MatFormFieldModule,
     FormsModule,
-    MatInputModule
+    MatInputModule,
+    MatIconModule
   ],
   providers: [
     provideAnimationsAsync()
