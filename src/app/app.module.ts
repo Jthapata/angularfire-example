@@ -18,12 +18,16 @@ import { FormsModule } from '@angular/forms';
 import { MatInputModule } from "@angular/material/input";
 import { CompanyListComponent } from './company/company-list/company-list.component';
 import { MatIconModule } from '@angular/material/icon';
+import { ContactEditComponent } from './contact/contact-edit/contact-edit.component';
+import { ContactListComponent } from './contact/contact-list/contact-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CompanyEditComponent,
-    CompanyListComponent
+    CompanyListComponent,
+    ContactEditComponent,
+    ContactListComponent
   ],
   imports: [
     BrowserModule,
