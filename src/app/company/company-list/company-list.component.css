@@ -3,3 +3,7 @@ button[mat-fab] {
     bottom: 25px;
     right: 25px;
   }
+.company {
+    padding: 2.5px;
+    margin-bottom: 2.5px;
+}

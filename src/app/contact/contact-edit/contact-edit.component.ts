@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Contact } from '../../models/contact';
+import { CompanyService } from '../../company/company.service';
 import { ContactService } from '../contact.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Company } from '../../models/company';
 
 @Component({
   selector: 'app-contact-edit',
@@ -11,17 +13,20 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class ContactEditComponent implements OnInit {
   contact$: Observable<Contact | undefined>;
+  companies$: Observable<Company[]>;
 
   constructor(
     private contactService: ContactService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
+    private companyService: CompanyService,
   ) {
     if (!this.isNew) {
       this.contact$ = contactService.getContactObservable(this.id);
     } else {
       this.contact$ = of({}) as Observable<Contact>;
     }
+    this.companies$ = companyService.getCompaniesObservable();
   }
 
   ngOnInit() {}

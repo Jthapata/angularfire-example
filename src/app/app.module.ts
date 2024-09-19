@@ -20,6 +20,7 @@ import { CompanyListComponent } from './company/company-list/company-list.compon
 import { MatIconModule } from '@angular/material/icon';
 import { ContactEditComponent } from './contact/contact-edit/contact-edit.component';
 import { ContactListComponent } from './contact/contact-list/contact-list.component';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { ContactListComponent } from './contact/contact-list/contact-list.compon
     MatFormFieldModule,
     FormsModule,
     MatInputModule,
-    MatIconModule
+    MatIconModule,
+    MatSelectModule
   ],
   providers: [
     provideAnimationsAsync()
